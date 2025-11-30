@@ -22,7 +22,7 @@ const Navbar = () => {
             }}
         >
             <div style={{ position: 'absolute', left: '4rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <img src="/ai500-logo.png" alt="AI500 Logo" style={{ height: '40px' }} />
+                <img src={`${import.meta.env.BASE_URL}ai500-logo.png`} alt="AI500 Logo" style={{ height: '40px' }} />
             </div>
 
             <div style={{ display: 'flex', gap: '3rem', fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)' }}>

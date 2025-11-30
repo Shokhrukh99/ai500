@@ -8,7 +8,7 @@ const teamMembers = [
         name: 'Dilshod Ibragimov',
         role: 'ML Developer',
         profileUrl: 'https://www.linkedin.com/in/dilshod-ibragimov-217163b4/?originalSubdomain=be',
-        imageUrl: '/team/dilshod.png',
+        imageUrl: `${import.meta.env.BASE_URL}team/dilshod.png`,
         stack: [
             { icon: <FaPython />, name: 'Python' },
             { icon: <SiTensorflow />, name: 'TensorFlow' },
@@ -30,7 +30,7 @@ const teamMembers = [
         name: 'Mukhammadmuso Abduzhabbarov',
         role: 'ML Developer',
         profileUrl: 'https://www.linkedin.com/in/mukhammadmuso-abduzhabbarov/',
-        imageUrl: '/team/mukhammadmuso.png',
+        imageUrl: `${import.meta.env.BASE_URL}team/mukhammadmuso.png`,
         stack: [
             { icon: <FaPython />, name: 'Python' },
             { icon: <SiScikitlearn />, name: 'Scikit-learn' },
@@ -42,7 +42,7 @@ const teamMembers = [
         name: 'Said Abduvaliyev',
         role: 'Full-Stack Developer',
         profileUrl: 'https://www.linkedin.com/in/saidbek/',
-        imageUrl: '/team/said.png',
+        imageUrl: `${import.meta.env.BASE_URL}team/said.png`,
         stack: [
             { icon: <FaReact />, name: 'React' },
             { icon: <FaNodeJs />, name: 'Node.js' },
