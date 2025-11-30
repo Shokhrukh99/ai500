@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const ProblemSolution = () => {
     const gradientStyle = {
@@ -83,57 +84,100 @@ const ProblemSolution = () => {
     );
 
     // CSS 3D Graphic for Solution (AI/Automated)
-    const SolutionGraphic = () => (
-        <div style={{ position: 'relative', width: '100%', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <motion.div
-                animate={{ scale: [1, 1.05, 1], boxShadow: ['0 0 20px rgba(0,242,255,0.2)', '0 0 40px rgba(0,242,255,0.4)', '0 0 20px rgba(0,242,255,0.2)'] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                    width: '300px',
-                    height: '300px',
-                    background: 'rgba(0, 242, 255, 0.05)',
-                    border: '1px solid var(--primary-color)',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative'
-                }}
-            >
-                <div style={{ fontSize: '5rem' }}>🤖</div>
+    const SolutionGraphic = () => {
+        const questions = [
+            "How do I save for a car?",
+            "Where did my money go last month?",
+            "Can I afford a new iPhone?",
+            "How much did I spend on taxis?",
+            "What is my daily budget?"
+        ];
+        const [text, setText] = useState('');
+        const [questionIndex, setQuestionIndex] = useState(0);
+        const [isDeleting, setIsDeleting] = useState(false);
+        const [typingSpeed, setTypingSpeed] = useState(100);
+
+        useEffect(() => {
+            const handleTyping = () => {
+                const currentQuestion = questions[questionIndex];
+
+                if (isDeleting) {
+                    setText(currentQuestion.substring(0, text.length - 1));
+                    setTypingSpeed(50);
+                } else {
+                    setText(currentQuestion.substring(0, text.length + 1));
+                    setTypingSpeed(100);
+                }
+
+                if (!isDeleting && text === currentQuestion) {
+                    setTimeout(() => setIsDeleting(true), 2000); // Wait before deleting
+                } else if (isDeleting && text === '') {
+                    setIsDeleting(false);
+                    setQuestionIndex((prev) => (prev + 1) % questions.length);
+                }
+            };
+
+            const timer = setTimeout(handleTyping, typingSpeed);
+            return () => clearTimeout(timer);
+        }, [text, isDeleting, questionIndex, typingSpeed]);
+
+        return (
+            <div style={{ position: 'relative', width: '100%', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    animate={{ scale: [1, 1.05, 1], boxShadow: ['0 0 20px rgba(0,242,255,0.2)', '0 0 40px rgba(0,242,255,0.4)', '0 0 20px rgba(0,242,255,0.2)'] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                        width: '300px',
+                        height: '300px',
+                        background: 'rgba(0, 242, 255, 0.05)',
+                        border: '1px solid var(--primary-color)',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative'
+                    }}
+                >
+                    <div style={{ fontSize: '5rem' }}>🤖</div>
+                    <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                        style={{
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '50%',
+                            borderTop: '2px solid var(--primary-color)',
+                            borderRight: '2px solid transparent',
+                            borderBottom: '2px solid transparent',
+                            borderLeft: '2px solid transparent',
+                        }}
+                    />
+                </motion.div>
+                <motion.div
+                    animate={{ y: [20, -20, 20] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     style={{
                         position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        borderRadius: '50%',
-                        borderTop: '2px solid var(--primary-color)',
-                        borderRight: '2px solid transparent',
-                        borderBottom: '2px solid transparent',
-                        borderLeft: '2px solid transparent',
+                        bottom: '10%',
+                        right: '0%',
+                        padding: '1rem',
+                        background: 'rgba(0,0,0,0.8)',
+                        border: '1px solid var(--primary-color)',
+                        borderRadius: '12px',
+                        fontSize: '0.9rem',
+                        minWidth: '200px',
+                        maxWidth: '250px',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
                     }}
-                />
-            </motion.div>
-            <motion.div
-                animate={{ y: [20, -20, 20] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                    position: 'absolute',
-                    bottom: '10%',
-                    right: '10%',
-                    padding: '1rem',
-                    background: 'rgba(0,0,0,0.8)',
-                    border: '1px solid var(--primary-color)',
-                    borderRadius: '12px',
-                    fontSize: '0.9rem'
-                }}
-            >
-                "Save 5M UZS?"
-            </motion.div>
-        </div>
-    );
+                >
+                    <span style={{ color: 'var(--primary-color)', marginRight: '0.5rem' }}>➜</span>
+                    {text}
+                    <span className="cursor" style={{ opacity: 1 }}>|</span>
+                </motion.div>
+            </div>
+        );
+    };
 
     return (
         <section id="problem-solution" className="section" style={{ padding: '4rem 4rem' }}>
@@ -233,9 +277,14 @@ const ProblemSolution = () => {
                             <div style={{ ...iconStyle, background: 'rgba(0, 242, 255, 0.2)', color: 'var(--primary-color)' }}>🧠</div>
                             <div>
                                 <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#fff' }}>AI Financial Assistant</h3>
-                                <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.6' }}>
-                                    An embedded AI agent analyzes your spending patterns to answer questions like <em>"How can I save 5M UZS?"</em> and provide personalized budget advice.
+                                <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.6', marginBottom: '1rem' }}>
+                                    An embedded AI agent analyzes your spending patterns to answer questions like <em>"How do I save for a car?"</em> and provide personalized budget advice.
                                 </p>
+                                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '8px', borderLeft: '3px solid var(--primary-color)' }}>
+                                    <p style={{ fontSize: '0.85rem', color: '#fff', margin: 0, fontStyle: 'italic' }}>
+                                        "With an average monthly income of <strong>15M UZS</strong> and spending of <strong>10M UZS</strong>, you can comfortably allocate <strong>5M UZS</strong> to your car fund."
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </motion.div>
