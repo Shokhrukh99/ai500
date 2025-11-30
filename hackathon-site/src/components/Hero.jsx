@@ -1,9 +1,74 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef } from 'react';
 
 const Hero = () => {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start start", "end start"]
+    });
+
+    const smoothScroll = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+    // y1 is removed for the first shape as requested
+    const y2 = useTransform(smoothScroll, [0, 1], [0, -150]);
+    const opacity = useTransform(smoothScroll, [0, 0.5], [1, 0]);
+
     return (
-        <section className="section hero-section" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4rem', paddingTop: '80px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', width: '100%', maxWidth: '1400px', alignItems: 'center' }}>
+        // Removed overflow: 'hidden' to prevent clipping
+        <section ref={ref} className="section hero-section" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4rem', paddingTop: '60px', position: 'relative' }}>
+
+            {/* Abstract Animated Background Shapes */}
+            <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity }}>
+                {/* First Shape - No Parallax (y1 removed) */}
+                <motion.div
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                >
+                    <div style={{
+                        position: 'absolute',
+                        top: '15%',
+                        left: '-5%',
+                        width: '600px',
+                        height: '600px',
+                        background: 'radial-gradient(circle, rgba(0, 242, 255, 0.25) 0%, rgba(0, 0, 0, 0) 70%)',
+                        borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%',
+                        filter: 'blur(40px)',
+                    }}></div>
+                </motion.div>
+
+                <motion.div
+                    style={{ y: y2 }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                >
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '10%',
+                        right: '5%',
+                        width: '600px',
+                        height: '600px',
+                        background: 'radial-gradient(circle, rgba(100, 100, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%)',
+                        borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+                        filter: 'blur(50px)',
+                    }}></div>
+                </motion.div>
+
+                <motion.div
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '800px',
+                        height: '800px',
+                        background: 'radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0) 60%)',
+                        borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                        filter: 'blur(60px)',
+                    }}
+                ></motion.div>
+            </motion.div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', width: '100%', maxWidth: '1400px', alignItems: 'center', zIndex: 1 }}>
 
                 {/* Left Content */}
                 <motion.div
@@ -23,7 +88,7 @@ const Hero = () => {
                             background: 'linear-gradient(to right, #ffffff, #a0a0a0)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent'
-                        }}>Freedom</span>
+                        }}>Assistant</span>
                     </h1>
                     <p style={{ fontSize: '1.2rem', marginBottom: '3rem', color: 'rgba(255,255,255,0.6)', maxWidth: '500px', lineHeight: '1.6' }}>
                         Automated SMS analytics and intelligent financial insights powered by AI.
