@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ProblemSolution from './components/ProblemSolution'
 import Team from './components/Team'
-import WhyUs from './components/WhyUs'
+import Expertise from './components/Expertise'
 import Roadmap from './components/Roadmap'
 import HowWeSolveIt from './components/HowWeSolveIt'
 import Background from './components/Background'
@@ -16,7 +16,7 @@ function App() {
       <Hero />
       <ProblemSolution />
       <Team />
-      <WhyUs />
+      <Expertise />
       <Roadmap />
       <HowWeSolveIt />
     </div>

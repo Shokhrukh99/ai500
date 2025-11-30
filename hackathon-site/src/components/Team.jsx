@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { FaPython, FaReact, FaNodeJs, FaAndroid, FaJava, FaDatabase } from 'react-icons/fa';
-import { SiTensorflow, SiPytorch, SiKotlin, SiMongodb, SiScikitlearn } from 'react-icons/si';
+import { FaPython, FaReact, FaNodeJs, FaJava, FaDatabase } from 'react-icons/fa';
+import { SiTensorflow, SiPytorch, SiScikitlearn, SiMongodb, SiFlutter, SiApachehadoop, SiStreamlit, SiRuby } from 'react-icons/si';
 
 const teamMembers = [
     // Row 1
@@ -10,9 +10,10 @@ const teamMembers = [
         profileUrl: 'https://www.linkedin.com/in/dilshod-ibragimov-217163b4/?originalSubdomain=be',
         imageUrl: `${import.meta.env.BASE_URL}team/dilshod.png`,
         stack: [
-            { icon: <FaPython />, name: 'Python' },
+            { icon: <SiPytorch />, name: 'PyTorch' },
             { icon: <SiTensorflow />, name: 'TensorFlow' },
-            { icon: <SiPytorch />, name: 'PyTorch' }
+            { icon: <SiScikitlearn />, name: 'Scikit-learn' },
+            { icon: <SiApachehadoop />, name: 'Hadoop' }
         ]
     },
     {
@@ -21,9 +22,10 @@ const teamMembers = [
         profileUrl: 'https://github.com/Shokhrukh99',
         imageUrl: 'https://avatars.githubusercontent.com/u/32006946?v=4',
         stack: [
-            { icon: <FaReact />, name: 'React' },
-            { icon: <FaNodeJs />, name: 'Node.js' },
-            { icon: <FaPython />, name: 'Python' }
+            { icon: <SiFlutter />, name: 'Flutter' },
+            { icon: <SiMongodb />, name: 'MongoDB' },
+            { icon: <SiTensorflow />, name: 'TensorFlow' },
+            { icon: <SiPytorch />, name: 'PyTorch' }
         ]
     },
     {
@@ -32,9 +34,10 @@ const teamMembers = [
         profileUrl: 'https://www.linkedin.com/in/mukhammadmuso-abduzhabbarov/',
         imageUrl: `${import.meta.env.BASE_URL}team/mukhammadmuso.png`,
         stack: [
-            { icon: <FaPython />, name: 'Python' },
+            { icon: <SiPytorch />, name: 'PyTorch' },
+            { icon: <SiTensorflow />, name: 'TensorFlow' },
             { icon: <SiScikitlearn />, name: 'Scikit-learn' },
-            { icon: <FaDatabase />, name: 'Data Science' }
+            { icon: <SiStreamlit />, name: 'Streamlit' }
         ]
     },
     // Row 2
@@ -44,9 +47,10 @@ const teamMembers = [
         profileUrl: 'https://www.linkedin.com/in/saidbek/',
         imageUrl: `${import.meta.env.BASE_URL}team/said.png`,
         stack: [
-            { icon: <FaReact />, name: 'React' },
+            { icon: <SiRuby />, name: 'Ruby' },
+            { icon: <FaJava />, name: 'Java' },
             { icon: <FaNodeJs />, name: 'Node.js' },
-            { icon: <SiMongodb />, name: 'MongoDB' }
+            { icon: <FaPython />, name: 'Python' }
         ]
     },
     {
@@ -55,9 +59,10 @@ const teamMembers = [
         profileUrl: 'https://www.linkedin.com/in/p-b28802262/',
         imageUrl: 'https://ui-avatars.com/api/?name=Pooja+Pooja&background=random&size=200', // Placeholder
         stack: [
-            { icon: <FaPython />, name: 'Python' },
+            { icon: <SiPytorch />, name: 'PyTorch' },
             { icon: <SiTensorflow />, name: 'TensorFlow' },
-            { icon: <SiPytorch />, name: 'PyTorch' }
+            { icon: <SiScikitlearn />, name: 'Scikit-learn' },
+            { icon: <SiStreamlit />, name: 'Streamlit' }
         ]
     }
 ];
