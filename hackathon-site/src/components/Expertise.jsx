@@ -62,7 +62,7 @@ const Expertise = () => {
                             <motion.div
                                 key={index}
                                 whileHover={{ scale: 1.02 }}
-                                className="glass-card"
+                                className="glass-card expertise-card"
                                 style={{
                                     padding: '2rem',
                                     display: 'flex',

@@ -7,7 +7,7 @@ const ProblemSolution = () => {
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         fontSize: '2.5rem',
-        marginBottom: '2rem',
+        marginBottom: '0.5rem',
         display: 'inline-block'
     };
 
@@ -180,19 +180,28 @@ const ProblemSolution = () => {
     };
 
     return (
-        <section id="problem-solution" className="section" style={{ padding: '4rem 4rem' }}>
-            <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '8rem' }}>
+        <section id="problem-solution" className="section">
+            <div className="problem-solution-container">
 
-                {/* Row 1: Problem (Left) + Graphic (Right) */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+                {/* Row 1: Problem */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    style={{ textAlign: 'center', marginBottom: '1rem' }}
+                >
+                    <h2 style={gradientStyle}>The Problem</h2>
+                </motion.div>
+
+                <div className="problem-solution-grid">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
+                        className="problem-text-content"
                     >
-                        <h2 style={gradientStyle}>The Problem</h2>
-
                         <div style={cardStyle}>
                             <div style={iconStyle}>📝</div>
                             <div>
@@ -229,18 +238,30 @@ const ProblemSolution = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
+                        className="problem-graphic-content"
                     >
                         <ProblemGraphic />
                     </motion.div>
                 </div>
 
-                {/* Row 2: Graphic (Left) + Solution (Right) */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+                {/* Row 2: Solution */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    style={{ textAlign: 'center', marginBottom: '1rem', marginTop: '4rem' }}
+                >
+                    <h2 style={gradientStyle}>Our Solution</h2>
+                </motion.div>
+
+                <div className="problem-solution-grid">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
+                        className="solution-graphic-content"
                     >
                         <SolutionGraphic />
                     </motion.div>
@@ -250,9 +271,8 @@ const ProblemSolution = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
+                        className="solution-text-content"
                     >
-                        <h2 style={gradientStyle}>Our Solution</h2>
-
                         <div style={{ ...cardStyle, border: '1px solid var(--primary-color)', background: 'rgba(0, 242, 255, 0.05)' }}>
                             <div style={{ ...iconStyle, background: 'rgba(0, 242, 255, 0.2)', color: 'var(--primary-color)' }}>🤖</div>
                             <div>

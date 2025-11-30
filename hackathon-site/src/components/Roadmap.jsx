@@ -35,7 +35,7 @@ const Roadmap = () => {
     };
 
     return (
-        <section id="roadmap" className="section" style={{ padding: '6rem 2rem', overflow: 'hidden' }}>
+        <section id="roadmap" className="section" style={{ padding: '6rem 0', overflow: 'hidden' }}>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ const Roadmap = () => {
                 style={{
                     textAlign: 'center',
                     fontSize: '2.5rem',
-                    marginBottom: '8rem', // Increased margin to prevent overlap
+                    marginBottom: '6rem', // Increased from 4rem
                     background: 'linear-gradient(to right, #ffffff, #a0a0a0)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -52,7 +52,8 @@ const Roadmap = () => {
                 Roadmap & Stage
             </motion.h2>
 
-            <div style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto', aspectRatio: '1000/750', width: '100%' }}>
+            {/* Desktop View */}
+            <div className="desktop-roadmap" style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto', padding: '0 2rem', aspectRatio: '1000/750', width: '100%' }}>
                 {/* SVG Curved Path */}
                 <svg
                     viewBox="0 0 1000 750"
@@ -68,7 +69,6 @@ const Roadmap = () => {
                     }}
                 >
                     {/* Background Path (Grey) */}
-                    {/* Balanced lines: Y at 100, 375, 650 */}
                     <motion.path
                         d={`M 20 100 
                            L 980 100 
@@ -186,6 +186,82 @@ const Roadmap = () => {
                         </motion.div>
                     );
                 })}
+            </div>
+
+            {/* Mobile View */}
+            <div className="mobile-roadmap" style={{ maxWidth: '400px', margin: '0 auto', padding: '0 1rem' }}>
+                <div style={{ position: 'relative', paddingLeft: '0.5rem', paddingBottom: '2rem' }}>
+                    {steps.map((step, index) => {
+                        const isLast = index === steps.length - 1;
+                        const isCompleted = index < 2; // 0 and 1 are fully completed, line to next is active
+
+                        return (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                style={{
+                                    marginBottom: '1.5rem', // Reverted gap
+                                    position: 'relative',
+                                    marginLeft: '2.5rem',
+                                    zIndex: index // Ensure later items (dots) cover earlier items (lines)
+                                }}
+                            >
+                                {/* Connecting Line */}
+                                {!isLast && (
+                                    <div style={{
+                                        position: 'absolute',
+                                        left: '-1.5rem',
+                                        top: '1.5rem',
+                                        bottom: '-1.5rem', // Reverted extension
+                                        width: '2px',
+                                        height: 'calc(100% + 1.5rem)', // Reverted height
+                                        background: isCompleted ? 'var(--primary-color)' : 'var(--glass-border)',
+                                        transform: 'translateX(-50%)',
+                                        zIndex: -1 // Behind the dot of the current item
+                                    }} />
+                                )}
+
+                                {/* Node Circle */}
+                                <div style={{
+                                    position: 'absolute',
+                                    left: '-1.5rem',
+                                    top: '1.5rem',
+                                    transform: 'translate(-50%, -50%)',
+                                    width: '24px',
+                                    height: '24px',
+                                    borderRadius: '50%',
+                                    background: index <= 2 ? 'var(--primary-color)' : '#1a1a1a',
+                                    border: index === 2 ? '3px solid rgba(0, 242, 255, 0.3)' : '2px solid #444',
+                                    boxShadow: index === 2 ? '0 0 15px var(--primary-color)' : 'none',
+                                    zIndex: 2
+                                }}></div>
+
+                                <div className="glass-card" style={{
+                                    padding: '1rem',
+                                    border: index === 2 ? '1px solid var(--primary-color)' : '1px solid rgba(255,255,255,0.05)',
+                                    background: index === 2 ? 'rgba(0, 242, 255, 0.05)' : 'rgba(255, 255, 255, 0.03)'
+                                }}>
+                                    <h4 style={{ fontSize: '1rem', marginBottom: '0.25rem', color: '#fff' }}>{step.phase}</h4>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{
+                                            fontSize: '0.75rem',
+                                            color: index === 2 ? 'var(--primary-color)' : 'rgba(255,255,255,0.6)',
+                                            fontWeight: index === 2 ? 'bold' : 'normal',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '1px'
+                                        }}>
+                                            {step.status}
+                                        </span>
+                                        <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>{step.date}</span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
             </div>
         </section>
     );

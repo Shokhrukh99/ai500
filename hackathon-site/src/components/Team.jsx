@@ -102,7 +102,7 @@ const Team = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
 
                     {/* Row 1: 3 Members */}
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+                    <div className="team-row">
                         {teamMembers.slice(0, 3).map((member, index) => (
                             <motion.div
                                 key={index}
@@ -165,7 +165,7 @@ const Team = () => {
                     </div>
 
                     {/* Row 2: 2 Members */}
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+                    <div className="team-row">
                         {teamMembers.slice(3, 5).map((member, index) => (
                             <motion.div
                                 key={index}

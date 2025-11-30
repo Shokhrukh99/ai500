@@ -33,7 +33,7 @@ const Implementation = () => {
                 Implementation Plan
             </motion.h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '6rem', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="implementation-container">
 
                 {/* Execution Strategy - Vertical Roadmap Style */}
                 <div style={{ position: 'relative' }}>
@@ -52,7 +52,7 @@ const Implementation = () => {
                     </div>
 
                     {/* Vertical Line */}
-                    <div style={{
+                    <div className="implementation-timeline-line" style={{
                         position: 'absolute',
                         left: '50%',
                         top: '100px',
@@ -67,13 +67,14 @@ const Implementation = () => {
                             { title: 'Zero-Knowledge Ingestion', desc: 'Intercept SMS in real-time. Process in RAM. Save to encrypted local DB.', phase: 'Phase 1' },
                             { title: 'Hybrid Parsing Engine', desc: 'Regex for speed (95% coverage) + SLM for complex unstructured data.', phase: 'Phase 2' },
                             { title: 'RAG & Insights', desc: 'Retrieval-Augmented Generation on local history for grounded advice.', phase: 'Phase 3' }
-                        ].map((item, index) => (
+                        ].map((item, index, arr) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.2 }}
+                                className="implementation-timeline-item"
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center',
@@ -81,8 +82,38 @@ const Implementation = () => {
                                     position: 'relative'
                                 }}
                             >
+                                {/* Mobile Connecting Lines (Hidden on Desktop via CSS) */}
+                                <div className="mobile-timeline-line-wrapper">
+                                    {/* Top Line - connects to previous */}
+                                    {index > 0 && (
+                                        <div className="mobile-timeline-line top" style={{
+                                            position: 'absolute',
+                                            left: '50%', // Will be overridden to -2rem on mobile
+                                            top: '-2rem', // Start from half the gap above
+                                            height: '6rem', // Reach down to the node (approx 3.75rem + 2rem)
+                                            width: '2px',
+                                            background: 'linear-gradient(to bottom, var(--primary-color), var(--primary-color))',
+                                            transform: 'translateX(-50%)',
+                                            zIndex: 1
+                                        }}></div>
+                                    )}
+                                    {/* Bottom Line - connects to next */}
+                                    {index < arr.length - 1 && (
+                                        <div className="mobile-timeline-line bottom" style={{
+                                            position: 'absolute',
+                                            left: '50%',
+                                            top: '3.75rem', // Start from center of node (3rem top + 12px radius)
+                                            height: 'calc(100% - 3.75rem + 2rem)', // Extend to half the gap below
+                                            width: '2px',
+                                            background: 'linear-gradient(to bottom, var(--primary-color), var(--primary-color))',
+                                            transform: 'translateX(-50%)',
+                                            zIndex: 1
+                                        }}></div>
+                                    )}
+                                </div>
+
                                 {/* Center Node */}
-                                <div style={{
+                                <div className="implementation-timeline-node" style={{
                                     position: 'absolute',
                                     left: '50%',
                                     width: '24px',
@@ -96,7 +127,7 @@ const Implementation = () => {
                                 }}></div>
 
                                 {/* Content Card */}
-                                <div className="glass-card" style={{
+                                <div className="glass-card implementation-timeline-card" style={{
                                     width: '40%', // Reduced width for gap
                                     padding: '2rem',
                                     textAlign: index % 2 === 0 ? 'right' : 'left',
@@ -105,7 +136,7 @@ const Implementation = () => {
                                     position: 'relative'
                                 }}>
                                     {/* Connecting Line */}
-                                    <div style={{
+                                    <div className="implementation-connector" style={{
                                         position: 'absolute',
                                         top: '50%',
                                         [index % 2 === 0 ? 'right' : 'left']: '-20%', // Extend towards center
@@ -149,11 +180,7 @@ const Implementation = () => {
                         </h3>
                     </div>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                        gap: '2rem'
-                    }}>
+                    <div className="stack-grid">
                         {stackItems.map((item, index) => (
                             <motion.div
                                 key={index}

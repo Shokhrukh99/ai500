@@ -16,7 +16,7 @@ const Hero = () => {
 
     return (
         // Removed overflow: 'hidden' to prevent clipping
-        <section ref={ref} className="section hero-section" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4rem', paddingTop: '60px', position: 'relative' }}>
+        <section ref={ref} className="section hero-section" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '60px', position: 'relative' }}>
 
             {/* Abstract Animated Background Shapes */}
             <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity }}>
@@ -68,13 +68,14 @@ const Hero = () => {
                 ></motion.div>
             </motion.div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', width: '100%', maxWidth: '1400px', alignItems: 'center', zIndex: 1 }}>
+            <div className="hero-grid">
 
                 {/* Left Content */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
+                    className="hero-content-left"
                     style={{ textAlign: 'left' }}
                 >
                     <h1 style={{ fontSize: '5rem', fontWeight: '800', lineHeight: '1.1', marginBottom: '1.5rem' }}>
@@ -101,6 +102,7 @@ const Hero = () => {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
+                    className="hero-content-right"
                     style={{ position: 'relative', height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
                     {/* Gradient Flare */}
@@ -119,19 +121,19 @@ const Hero = () => {
                         animate={{ y: [-10, 10, -10], rotate: [0, 2, 0] }}
                         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                         style={{
-                            width: '380px',
-                            height: '240px',
+                            width: 'min(340px, 85vw)',
+                            height: 'min(220px, 55vw)',
                             background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
                             backdropFilter: 'blur(20px)',
                             borderRadius: '24px',
                             border: '1px solid rgba(255,255,255,0.2)',
                             position: 'absolute',
-                            top: '20%',
-                            right: '10%',
+                            top: '15%',
+                            right: '5%',
                             zIndex: 1,
                             transform: 'rotate(15deg)',
                             boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                            padding: '2rem',
+                            padding: '1.5rem',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between'
@@ -152,18 +154,18 @@ const Hero = () => {
                         animate={{ y: [10, -10, 10], rotate: [0, -2, 0] }}
                         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                         style={{
-                            width: '380px',
-                            height: '240px',
+                            width: 'min(340px, 85vw)',
+                            height: 'min(220px, 55vw)',
                             background: 'linear-gradient(135deg, var(--primary-color), #000)',
                             borderRadius: '24px',
                             border: '1px solid rgba(255,255,255,0.1)',
                             position: 'absolute',
-                            top: '40%',
-                            left: '10%',
+                            top: '45%',
+                            left: '5%',
                             zIndex: 2,
                             transform: 'rotate(-10deg)',
                             boxShadow: '0 30px 60px rgba(0, 242, 255, 0.2)',
-                            padding: '2rem',
+                            padding: '1.5rem',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between'

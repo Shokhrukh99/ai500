@@ -52,6 +52,8 @@ body {
   background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Standard property */
 }
 
 html {
@@ -79,4 +81,299 @@ h3 {
 p {
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Default Grid Layouts (Desktop) */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1400px;
+  align-items: center;
+  z-index: 1;
+}
+
+.problem-solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.problem-solution-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.responsive-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.implementation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.implementation-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.team-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.desktop-roadmap {
+  display: block;
+}
+
+.mobile-roadmap {
+  display: none;
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+
+  .responsive-grid-3,
+  .responsive-grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 3rem !important;
+  }
+
+  h2 {
+    font-size: 2.5rem !important;
+  }
+
+  /* Navigation */
+  .desktop-menu {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: block !important;
+  }
+
+  /* Hero Section */
+  .hero-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 2rem !important;
+    text-align: center;
+    padding-top: 2rem;
+  }
+
+  .hero-content-left {
+    text-align: center !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 1;
+    /* Text first */
+    z-index: 2;
+  }
+
+  .hero-content-right {
+    height: 350px !important;
+    margin-top: 0 !important;
+    order: 2;
+    /* Card second */
+    width: 100%;
+    z-index: 1;
+  }
+
+  /* Problem & Solution Fixes */
+  .problem-solution-container {
+    gap: 2rem !important;
+    width: 100% !important;
+  }
+
+  .problem-solution-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 2rem !important;
+    text-align: center;
+  }
+
+  /* Reorder: Graphic First, Text Second */
+  .problem-graphic-content,
+  .solution-graphic-content {
+    order: -1;
+    /* Graphic moves to top */
+    margin-bottom: 1rem;
+    transform: scale(0.8);
+    /* Make graphic smaller on mobile */
+  }
+
+  .problem-text-content,
+  .solution-text-content {
+    order: 1;
+  }
+
+  /* Ensure graphics fit */
+  .problem-solution-grid>div {
+    width: 100%;
+  }
+
+  /* Expertise & Team */
+  .responsive-grid-3,
+  .responsive-grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .expertise-card {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-self: center !important;
+    width: 100% !important;
+  }
+
+  .team-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Roadmap */
+  .desktop-roadmap {
+    display: none !important;
+  }
+
+  .mobile-roadmap {
+    display: block !important;
+  }
+
+  /* Implementation */
+  .implementation-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem;
+  }
+
+  .stack-grid {
+    grid-template-columns: 1fr !important;
+    /* Single column for stack */
+  }
+
+  .implementation-container {
+    gap: 4rem !important;
+    padding: 0 1rem;
+  }
+
+  /* Force vertical timeline on mobile for Implementation */
+  .implementation-timeline-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin-left: 2rem !important;
+    width: calc(100% - 2rem) !important;
+    /* Fix overflow */
+    box-sizing: border-box !important;
+  }
+
+  .implementation-timeline-node {
+    left: -2rem !important;
+    /* Move node to the left line */
+    transform: translateX(-50%) !important;
+    top: 3rem !important;
+    /* Align with card content */
+  }
+
+  .implementation-timeline-card {
+    width: 100% !important;
+    text-align: left !important;
+    margin-top: 1rem;
+    box-sizing: border-box !important;
+    /* Ensure padding doesn't add to width */
+    padding: 1.5rem !important;
+    /* Slightly reduced padding for mobile */
+  }
+
+  /* Hide global line on mobile */
+  .implementation-timeline-line {
+    display: none !important;
+  }
+
+  /* Show per-item lines on mobile */
+  .mobile-timeline-line-wrapper {
+    display: block !important;
+  }
+
+  .mobile-timeline-line {
+    left: -2rem !important;
+    /* Align with node */
+  }
+
+  .implementation-connector {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .desktop-menu {
+    display: flex !important;
+  }
+
+  /* Hide mobile lines on desktop */
+  .mobile-timeline-line-wrapper {
+    display: none !important;
+  }
 }
