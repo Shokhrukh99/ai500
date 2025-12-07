@@ -1,15 +1,92 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
     const menuVariants = {
         closed: { opacity: 0, x: "100%" },
         open: { opacity: 1, x: 0 }
+    };
+
+    const isDemo = location.pathname === '/demo';
+
+    const landingLinks = [
+        { id: 'problem-solution', label: 'Problem & Solution' },
+        { id: 'team', label: 'Team' },
+        { id: 'expertise', label: 'Expertise' },
+        { id: 'roadmap', label: 'Roadmap' },
+        { id: 'implementation', label: 'Implementation' },
+    ];
+
+    const demoLinks = [
+        { id: 'features', label: 'Features' },
+        { id: 'showcase', label: 'Showcase' },
+        { id: 'demo-qa', label: 'Demo Q&A' },
+        { id: 'next-steps', label: 'Next steps' },
+    ];
+
+    const navLinks = isDemo ? demoLinks : landingLinks;
+
+    const NavItem = ({ item, mobile = false }) => {
+        const isHome = location.pathname === '/';
+
+        // Logic for Landing Page Links
+        if (!isDemo) {
+            if (isHome) {
+                return (
+                    <a
+                        href={`#${item.id}`}
+                        onClick={mobile ? toggleMenu : undefined}
+                        style={{
+                            color: mobile ? '#fff' : 'inherit',
+                            textDecoration: 'none',
+                            transition: 'color 0.3s',
+                            fontSize: mobile ? '1.5rem' : 'inherit'
+                        }}
+                    >
+                        {item.label}
+                    </a>
+                );
+            } else {
+                return (
+                    <Link
+                        to={`/#${item.id}`}
+                        onClick={mobile ? toggleMenu : undefined}
+                        style={{
+                            color: mobile ? '#fff' : 'inherit',
+                            textDecoration: 'none',
+                            transition: 'color 0.3s',
+                            fontSize: mobile ? '1.5rem' : 'inherit'
+                        }}
+                    >
+                        {item.label}
+                    </Link>
+                );
+            }
+        }
+
+        // Logic for Demo Page Links
+        // If we are on the demo page, we just scroll to the id
+        return (
+            <a
+                href={`#${item.id}`}
+                onClick={mobile ? toggleMenu : undefined}
+                style={{
+                    color: mobile ? '#fff' : 'inherit',
+                    textDecoration: 'none',
+                    transition: 'color 0.3s',
+                    fontSize: mobile ? '1.5rem' : 'inherit'
+                }}
+            >
+                {item.label}
+            </a>
+        );
     };
 
     return (
@@ -33,16 +110,14 @@ const Navbar = () => {
             }}
         >
             <div style={{ position: 'absolute', left: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <img src={`${import.meta.env.BASE_URL}ai500-logo.png`} alt="AI500 Logo" style={{ height: '40px' }} />
+                <Link to="/">
+                    <img src={`${import.meta.env.BASE_URL}ai500-logo.png`} alt="AI500 Logo" style={{ height: '40px' }} />
+                </Link>
             </div>
 
             {/* Desktop Menu */}
-            <div className="desktop-menu" style={{ gap: '3rem', fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)' }}>
-                <a href="#problem-solution" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Problem & Solution</a>
-                <a href="#team" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Team</a>
-                <a href="#expertise" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Expertise</a>
-                <a href="#roadmap" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Roadmap</a>
-                <a href="#implementation" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.3s' }}>Implementation</a>
+            <div className="desktop-menu" style={{ gap: '3rem', fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', display: 'flex' }}>
+                {navLinks.map(link => <NavItem key={link.id} item={link} />)}
             </div>
 
             {/* Mobile Menu Button */}
@@ -61,11 +136,7 @@ const Navbar = () => {
                         variants={menuVariants}
                         transition={{ duration: 0.3 }}
                     >
-                        <a href="#problem-solution" onClick={toggleMenu} style={{ fontSize: '1.5rem', color: '#fff', textDecoration: 'none' }}>Problem & Solution</a>
-                        <a href="#team" onClick={toggleMenu} style={{ fontSize: '1.5rem', color: '#fff', textDecoration: 'none' }}>Team</a>
-                        <a href="#expertise" onClick={toggleMenu} style={{ fontSize: '1.5rem', color: '#fff', textDecoration: 'none' }}>Expertise</a>
-                        <a href="#roadmap" onClick={toggleMenu} style={{ fontSize: '1.5rem', color: '#fff', textDecoration: 'none' }}>Roadmap</a>
-                        <a href="#implementation" onClick={toggleMenu} style={{ fontSize: '1.5rem', color: '#fff', textDecoration: 'none' }}>Implementation</a>
+                        {navLinks.map(link => <NavItem key={link.id} item={link} mobile />)}
                     </motion.div>
                 )}
             </AnimatePresence>

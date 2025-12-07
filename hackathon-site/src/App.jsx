@@ -1,27 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import ProblemSolution from './components/ProblemSolution'
-import Team from './components/Team'
-import Expertise from './components/Expertise'
-import Roadmap from './components/Roadmap'
-import Implementation from './components/Implementation'
-import Background from './components/Background'
-import ScrollToTop from './components/ScrollToTop'
+import LandingPage from './components/LandingPage'
+import DemoPage from './components/DemoPage'
 
 function App() {
   return (
-    <div className="app-container">
-      <Navbar />
-      <ScrollToTop />
-      <Background />
-      <Hero />
-      <ProblemSolution />
-      <Team />
-      <Expertise />
-      <Roadmap />
-      <Implementation />
-    </div>
+    <Router basename={import.meta.env.BASE_URL}>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/demo" element={<DemoPage />} />
+      </Routes>
+    </Router>
   )
 }
 

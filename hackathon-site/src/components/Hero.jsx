@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 
+import { Link } from 'react-router-dom';
+
 const Hero = () => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -95,6 +97,28 @@ const Hero = () => {
                         Automated SMS analytics and intelligent financial insights powered by AI.
                         Track, save, and grow your wealth without lifting a finger.
                     </p>
+                    <Link to="/demo" style={{
+                        display: 'inline-block',
+                        padding: '1rem 2.5rem',
+                        background: 'linear-gradient(to right, #ffffff, #a0a0a0)',
+                        color: '#000',
+                        fontWeight: 'bold',
+                        borderRadius: '30px',
+                        textDecoration: 'none',
+                        fontSize: '1.1rem',
+                        transition: 'transform 0.2s, box-shadow 0.2s'
+                    }}
+                        onMouseOver={(e) => {
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                            e.currentTarget.style.boxShadow = '0 0 20px rgba(255,255,255,0.3)';
+                        }}
+                        onMouseOut={(e) => {
+                            e.currentTarget.style.transform = 'scale(1)';
+                            e.currentTarget.style.boxShadow = 'none';
+                        }}
+                    >
+                        Demo
+                    </Link>
                 </motion.div>
 
                 {/* Right Content - CSS 3D Cards */}
