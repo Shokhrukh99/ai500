@@ -3,7 +3,7 @@ import Background from './Background'
 import ScrollToTop from './ScrollToTop'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { FaSms, FaRobot, FaChartPie, FaArrowRight } from 'react-icons/fa'
+import { FaSms, FaRobot, FaChartPie, FaArrowRight, FaAndroid } from 'react-icons/fa'
 import { SiFlutter, SiPython, SiSqlite, SiTensorflow } from 'react-icons/si'
 
 const FeatureSection = ({ title, description, image, icon, align = 'left' }) => {
@@ -260,7 +260,7 @@ function DemoPage() {
                 </div>
 
                 {/* 3. Video & Project Details Section */}
-                <div id="showcase" style={{ width: '100%', maxWidth: '1000px', marginBottom: '6rem' }}>
+                <div id="showcase" style={{ width: '100%', maxWidth: '1200px', marginBottom: '6rem' }}>
                     <h2 style={{
                         fontSize: '3rem',
                         marginBottom: '3rem',
@@ -276,7 +276,7 @@ function DemoPage() {
                         <div style={{
                             display: 'flex',
                             flexWrap: 'wrap',
-                            alignItems: 'flex-start',
+                            alignItems: 'stretch', // Stretch to match heights
                             gap: '4rem',
                             justifyContent: 'center'
                         }}>
@@ -285,8 +285,8 @@ function DemoPage() {
                                 flex: '0 0 auto',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '2rem',
-                                width: '320px'
+                                justifyContent: 'center', // Center video vertically if column is taller
+                                width: '400px'
                             }}>
                                 {/* Video */}
                                 <div style={{
@@ -313,8 +313,8 @@ function DemoPage() {
                                 flex: '1 1 400px',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '2rem',
-                                justifyContent: 'center',
+                                gap: '1.5rem',
+                                justifyContent: 'center', // Center content vertically against video
                                 textAlign: 'left'
                             }}>
                                 {/* 1. About */}
@@ -345,7 +345,7 @@ function DemoPage() {
 
                                 {/* 3. Stack (Icons) */}
                                 <div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
                                         <h3 style={{ margin: 0, fontSize: '1.5rem', color: '#fff' }}>Tech Stack</h3>
                                     </div>
                                     <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
@@ -391,13 +391,74 @@ function DemoPage() {
                                     </div>
                                 </div>
 
+                                {/* Divider */}
+                                <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', width: '100%' }}></div>
+
+                                {/* 5. Demo Build */}
+                                <div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                                        <h3 style={{ margin: 0, fontSize: '1.5rem', color: '#fff' }}>Try it Yourself</h3>
+                                    </div>
+
+                                    <a
+                                        href={`${import.meta.env.BASE_URL}Fiscal-release.apk`}
+                                        download
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '1rem',
+                                            background: 'linear-gradient(45deg, var(--primary-color), var(--secondary-color))',
+                                            color: '#fff',
+                                            padding: '1rem 2rem',
+                                            borderRadius: '12px',
+                                            textDecoration: 'none',
+                                            fontWeight: 'bold',
+                                            fontSize: '1.2rem',
+                                            boxShadow: '0 10px 20px rgba(0, 242, 255, 0.3)',
+                                            transition: 'transform 0.2s',
+                                            marginBottom: '1.5rem'
+                                        }}
+                                        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                                        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                                    >
+                                        <FaAndroid style={{ fontSize: '1.5rem' }} />
+                                        Download APK (v0.1)
+                                    </a>
+
+                                    <div style={{
+                                        background: 'rgba(255, 165, 0, 0.1)',
+                                        border: '1px solid rgba(255, 165, 0, 0.3)',
+                                        borderRadius: '12px',
+                                        padding: '1rem',
+                                        display: 'flex',
+                                        gap: '1rem',
+                                        alignItems: 'flex-start'
+                                    }}>
+                                        <div style={{ color: 'orange', fontSize: '1.2rem', marginTop: '2px' }}>⚠️</div>
+                                        <div>
+                                            <p style={{ margin: '0 0 0.5rem 0', color: 'orange', fontWeight: 'bold', fontSize: '0.9rem' }}>Installation Note</p>
+                                            <p style={{ margin: 0, fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.4' }}>
+                                                Since this is a prototype not on the Play Store, you may need to <strong>disable Play Protect</strong> or allow <strong>"Install from Unknown Sources"</strong> in your settings to install it.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
 
                     {/* SEPARATE Q&A SECTION */}
                     <div id="demo-qa" style={{ marginTop: '4rem', width: '100%', maxWidth: '800px', margin: '4rem auto 0 auto' }}>
-                        <h3 style={{ color: '#fff', fontSize: '2rem', textAlign: 'center', marginBottom: '2rem' }}>Demo Q&A</h3>
+                        <h3 style={{
+                            fontSize: '2.5rem',
+                            textAlign: 'center',
+                            marginBottom: '3rem',
+                            background: 'linear-gradient(to right, #ffffff, #a0a0a0)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                        }}>Demo Q&A</h3>
                         <ChatDemo />
                     </div>
                 </div>
