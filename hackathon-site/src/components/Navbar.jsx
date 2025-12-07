@@ -42,12 +42,20 @@ const Navbar = () => {
                 return (
                     <a
                         href={`#${item.id}`}
-                        onClick={mobile ? toggleMenu : undefined}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            const element = document.getElementById(item.id);
+                            if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                            if (mobile) toggleMenu();
+                        }}
                         style={{
                             color: mobile ? '#fff' : 'inherit',
                             textDecoration: 'none',
                             transition: 'color 0.3s',
-                            fontSize: mobile ? '1.5rem' : 'inherit'
+                            fontSize: mobile ? '1.5rem' : 'inherit',
+                            cursor: 'pointer'
                         }}
                     >
                         {item.label}
@@ -56,7 +64,8 @@ const Navbar = () => {
             } else {
                 return (
                     <Link
-                        to={`/#${item.id}`}
+                        to="/"
+                        state={{ targetId: item.id }}
                         onClick={mobile ? toggleMenu : undefined}
                         style={{
                             color: mobile ? '#fff' : 'inherit',
@@ -76,12 +85,20 @@ const Navbar = () => {
         return (
             <a
                 href={`#${item.id}`}
-                onClick={mobile ? toggleMenu : undefined}
+                onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.getElementById(item.id);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    if (mobile) toggleMenu();
+                }}
                 style={{
                     color: mobile ? '#fff' : 'inherit',
                     textDecoration: 'none',
                     transition: 'color 0.3s',
-                    fontSize: mobile ? '1.5rem' : 'inherit'
+                    fontSize: mobile ? '1.5rem' : 'inherit',
+                    cursor: 'pointer'
                 }}
             >
                 {item.label}
